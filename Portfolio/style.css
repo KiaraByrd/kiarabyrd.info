@@ -1,0 +1,308 @@
+.image {
+  width: auto;
+  height: 426px;
+}
+.radio {
+  /*display: none;*/
+}
+.images {
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.images-inner {
+  width: 500%;
+  transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
+  transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000);
+}
+.image-slide {
+  width: 20%;
+  float: left;
+}
+.image-slide,
+.fake-radio,
+.radio-btn {
+  transition: all 0.5s ease-out;
+}
+.fake-radio {
+  float: right;
+}
+
+
+/* Move slides overflowed container */
+#slide1:checked ~ .images .images-inner {
+  margin-left: 0;
+}
+#slide2:checked ~ .images .images-inner {
+  margin-left: -100%;
+}
+#slide3:checked ~ .images .images-inner {
+  margin-left: -200%;
+}
+
+
+
+
+/* Color of bullets */
+#slide1:checked ~ div .fake-radio .radio-btn:nth-child(1),
+#slide2:checked ~ div .fake-radio .radio-btn:nth-child(2),
+#slide3:checked ~ div .fake-radio .radio-btn:nth-child(3) {
+  background: red;
+}
+.radio-btn {
+  width: 9px;
+  height: 9px;
+  border-radius: 5px;
+  background: gray;
+  display: inline-block !important;
+  margin: 0 1px;
+  cursor: pointer;
+}
+/* Color of bullets - END */
+
+
+
+
+/* Text of slides */
+#slide1:checked ~ .labels .label:nth-child(1),
+#slide2:checked ~ .labels .label:nth-child(2),
+#slide3:checked ~ .labels .label:nth-child(3) {
+  opacity: 1;
+}
+
+.label {
+  opacity: 0;
+  position: absolute;
+}
+/* Text of slides - END */
+
+
+
+/* Calculate AUTOPLAY for BULLETS */
+@keyframes bullet {
+  0%, 33.32333333333334%	{
+    background: orange;
+  }
+  33.333333333333336%, 100% {
+    background: gray;
+  }
+}
+
+
+#play1:checked ~ div .fake-radio .radio-btn:nth-child(1) {
+  animation: bullet 12300ms infinite -1000ms;
+}
+
+#play1:checked ~ div .fake-radio .radio-btn:nth-child(2) {
+  animation: bullet 12300ms infinite 3100ms;
+}
+
+#play1:checked ~ div .fake-radio .radio-btn:nth-child(3) {
+  animation: bullet 12300ms infinite 7200ms;
+}
+/* Calculate AUTOPLAY for BULLETS - END */
+
+
+
+
+/* Calculate AUTOPLAY for SLIDES */
+@keyframes slide {
+  0%, 25.203252032520325%	{ margin-left: 0; }
+  33.333333333333336%, 58.53658536585366%	{ margin-left: -100%; }
+  66.66666666666667%, 91.869918699187%	{ margin-left: -200%; }
+}
+
+
+.st-slider > #play1:checked ~ .images .images-inner {
+  animation: slide 12300ms infinite;
+}
+/* Calculate AUTOPLAY for SLIDES - END */
+
+
+
+
+
+/* Calculate AUTOPLAY for CAPTION */
+@keyframes caption {
+  0%, 33.32333333333334%	{
+    opacity: 1;
+  }
+  33.333333333333336%, 100% {
+    opacity: 0;
+  }
+}
+
+
+#play1:checked ~ .labels .label:nth-child(1) {
+  animation: caption 12300ms infinite -1000ms;
+}
+
+#play1:checked ~ .labels .label:nth-child(2) {
+  animation: caption 12300ms infinite 3100ms;
+}
+
+#play1:checked ~ .labels .label:nth-child(3) {
+  animation: caption 12300ms infinite 7200ms;
+}
+/* Calculate AUTOPLAY for CAPTION - END */
+
+/* if desktop */
+   .mobile_device_380px {
+       display: none;
+   }
+   .mobile_device_480px {
+       display: none;
+   }
+
+
+   /* if mobile device max width 380px */
+      @media only screen and (max-device-width: 380px) {
+          .mobile_device_380px{display: block;}
+          .desktop {display: none;}
+
+
+/*modal shit*/
+/* [Object] Modal
+ * =============================== */
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+  background: rgba(0,0,0, .9);
+  transition: opacity .25s ease;
+}
+
+.modal__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.modal-state {
+  display: none;
+}
+
+.modal-state:checked + .modal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-state:checked + .modal .modal__inner {
+  top: 0;
+}
+
+.modal__inner {
+  transition: top .25s ease;
+  position: absolute;
+  top: -20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  margin: auto;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1em 2em;
+  height: 50%;
+}
+
+.modal__close {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+.modal__close:after,
+.modal__close:before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 1.5em;
+  background: #ccc;
+  display: block;
+  transform: rotate(45deg);
+  left: 50%;
+  margin: -3px 0 0 -1px;
+  top: 0;
+}
+
+.modal__close:hover:after,
+.modal__close:hover:before {
+  background: #aaa;
+}
+
+.modal__close:before {
+  transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+
+  .modal__inner {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* Other
+ * =============================== */
+body {
+  padding: 1%;
+  font: 1/1.5em sans-serif;
+  text-align: center;
+}
+
+.btn {
+  cursor: pointer;
+  background: #27ae60;
+  display: inline-block;
+  padding: .5em 1em;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #2ecc71;
+}
+
+.btn:active {
+  background: #27ae60;
+  box-shadow: 0 1px 2px rgba(0,0,0, .2) inset;
+}
+
+.btn--blue {
+  background: #2980b9;
+}
+
+.btn--blue:hover,
+.btn--blue:focus {
+  background: #3498db;
+}
+
+.btn--blue:active {
+  background: #2980b9;
+}
+
+p img {
+  max-width: 200px;
+  height: auto;
+  float: left;
+  margin: 0 1em 1em 0;
+}
